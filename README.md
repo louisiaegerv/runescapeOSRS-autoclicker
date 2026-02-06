@@ -5,19 +5,23 @@ A feature-rich autoclicker designed for AFK skilling in Old School RuneScape (OS
 ## Features
 
 - **Multiple Click Points**: Add as many click locations as you need, each with its own delay
-- **Hotkey Capture**: Press F6 to instantly capture your cursor position - no manual coordinate entry
+- **Rapid Add Mode**: Press F6 to enter rapid add mode, then press 0-9 to capture cursor positions with preset delays
 - **Configurable Delays**: Set individual delays for each click point
 - **Position Randomization**: Add randomness to click positions to appear more human-like
-- **Save/Load Configurations**: Save your click patterns for different skilling activities
-- **Visual Feedback**: Real-time status updates and statistics
+- **Save/Load Configurations**: Save your click patterns for different skilling activities with names and descriptions
+- **Visual Feedback**: Real-time status updates, statistics, and progress bar
 - **Loop Control**: Set a specific number of loops or run infinitely
 - **Start Delay**: Grace period before clicking begins (time to switch to game window)
+- **Debug Mode**: Optional console output showing actual click coordinates
+- **Position Verification**: Prevents mouse drift by re-checking position before clicking
 
 ## Hotkeys
 
 | Key | Action |
 |-----|--------|
-| **F6** | Capture cursor position and add as click point |
+| **F6** | Enter Rapid Add Mode (capture cursor position) |
+| **0-9** | Set delay in seconds while in Rapid Add Mode (0 = 10 seconds) |
+| **F9 / ESC** | Exit Rapid Add Mode |
 | **F7** | Start the autoclicker |
 | **F8** | Stop the autoclicker |
 
@@ -35,19 +39,20 @@ A feature-rich autoclicker designed for AFK skilling in Old School RuneScape (OS
 
 1. Run the script:
    ```bash
-   python osrs_autoclicker.py
+   python autoclicker.py
    ```
 
-2. **Set up click points**:
-   - Position your cursor where you want to click in-game
-   - Press **F6** to capture that position
-   - Set the delay (time to wait AFTER this click before the next one)
-   - Optionally enable randomization for more natural clicks
-   - Click "Add"
+2. **Set up click points using Rapid Add Mode**:
+   - Press **F6** to enter Rapid Add Mode
+   - Move your mouse to the desired click location
+   - Press **0-9** to set the delay (in seconds) for that point
+   - Repeat for each click point
+   - Press **F9** or **ESC** to exit Rapid Add Mode
 
 3. **Configure settings**:
    - Set "Start Delay" - time before the first click (to switch to game window)
    - Set "Loop Count" - number of times to repeat the sequence (0 = infinite)
+   - Enable "Verify click position" to prevent mouse drift
 
 4. **Start clicking**:
    - Press **F7** or click the START button
@@ -65,14 +70,43 @@ A feature-rich autoclicker designed for AFK skilling in Old School RuneScape (OS
 ### Saving Configurations
 
 1. Set up your click points for a specific activity (e.g., fishing, woodcutting, mining)
-2. Click "💾 Save Config"
-3. Choose a filename (defaults include timestamp)
+2. Click "💾 Save" to quick-save an existing config, or "💾 Save As..." for a new config
+3. Enter a name and optional description
+4. Configs are saved to the `configs/` directory
 
 ### Loading Configurations
 
-1. Click "📂 Load Config"
-2. Select your saved JSON file
+1. Select a configuration from the "Saved Configurations" list
+2. Click "📂 Load Selected" or double-click the config
 3. Your click points and settings will be restored
+
+### Deleting Configurations
+
+- Select a configuration and click "🗑️ Delete Selected" to remove it
+
+## Configuration File Format
+
+Configurations are saved as JSON files in the `configs/` directory:
+
+```json
+{
+  "name": "Fishing Config",
+  "description": "3-tick fishing at Barbarian Village",
+  "start_delay": 3.0,
+  "loop_count": 0,
+  "click_points": [
+    {
+      "x": 500,
+      "y": 400,
+      "delay": 1.5,
+      "randomize": true,
+      "random_range": 8,
+      "enabled": true
+    }
+  ],
+  "saved_at": "2026-02-06T10:00:00"
+}
+```
 
 ## Example Configurations
 
@@ -108,6 +142,8 @@ Loop: Set to desired number
 3. **Start Delay**: Use at least 3 seconds to switch to your game window
 4. **Backup Configs**: Save configurations with descriptive names like "barbarian_fishing.json"
 5. **Window Position**: Keep your game window in the same position when using saved configs
+6. **Rapid Add Mode**: This is the fastest way to set up multiple click points
+7. **Debug Mode**: Enable this in settings to see actual click coordinates in the console
 
 ## Safety Notes
 
@@ -122,6 +158,13 @@ Loop: Set to desired number
 **Hotkeys not working**: Make sure the script is focused or try running as administrator
 
 **Clicks not registering**: Increase the delay after each click to ensure the game registers it
+
+**Mouse position drift**: Enable "Verify click position" in settings to ensure clicks happen at the intended location
+
+## Requirements
+
+- Python 3.8+
+- pynput >= 1.7.6
 
 ## License
 
