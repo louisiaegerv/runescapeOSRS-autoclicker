@@ -1,0 +1,31 @@
+{
+  "start_delay": 3.0,
+  "loop_count": 0,
+  "click_points": [
+    {
+      "x": 500,
+      "y": 400,
+      "delay": 1.5,
+      "randomize": true,
+      "random_range": 8,
+      "enabled": true
+    },
+    {
+      "x": 520,
+      "y": 380,
+      "delay": 2.0,
+      "randomize": true,
+      "random_range": 10,
+      "enabled": true
+    },
+    {
+      "x": 480,
+      "y": 420,
+      "delay": 3.0,
+      "randomize": false,
+      "random_range": 10,
+      "enabled": true
+    }
+  ],
+  "saved_at": "2026-02-06T10:00:00"
+}
